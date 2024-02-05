@@ -208,10 +208,13 @@ func (f *Filters) Handle(words []string, text string, taskConfig *config.TaskCon
 		for _, condition := range filterConfig.Conditions {
 			// 匹配第n列，如果n小于等于0，则变更为整个字符串包含
 			if condition.Index <= 0 {
-				if !strings.Contains(text, condition.Key) {
-					access = false
+				keywordOperationFunc := getKeywordOperation(condition.Op)
+				// include和exclude 支持多个匹配，多个规则为或的关系
+				if keywordOperationFunc(text, condition.Key) {
+					access = true
 					break
 				} else {
+					access = false
 					continue
 				}
 			}

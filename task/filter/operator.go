@@ -22,6 +22,8 @@
 
 package filter
 
+import "strings"
+
 func equal(a, b string) bool {
 	return a == b
 }
@@ -46,6 +48,35 @@ func getOperation(op string) func(a, b string) bool {
 		return equal
 	} else if op == "!=" {
 		return notEqual
+	} else {
+		return nil
+	}
+}
+
+/*
+是否包含关键字
+original: 原文
+keyWord: 关键字
+*/
+func includeKeyword(original, keyWord string) bool {
+	return strings.Contains(original, keyWord)
+}
+
+/*
+*
+不包含关键字
+original: 原文
+keyWord: 关键字
+*/
+func excludeKeyword(original, keyWord string) bool {
+	return !strings.Contains(original, keyWord)
+}
+
+func getKeywordOperation(op string) func(a, b string) bool {
+	if op == "=" {
+		return includeKeyword
+	} else if op == "!=" {
+		return excludeKeyword
 	} else {
 		return nil
 	}
