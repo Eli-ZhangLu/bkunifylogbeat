@@ -26,15 +26,15 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/TencentBlueKing/bkunifylogbeat/beater"
 	"github.com/TencentBlueKing/bkmonitor-datalink/pkg/libgse/beat"
+	"github.com/TencentBlueKing/bkunifylogbeat/beater"
 	"github.com/elastic/beats/libbeat/cmd/instance"
 	"github.com/elastic/beats/libbeat/publisher/processing"
 )
 
 var (
 	beatName = "bkunifylogbeat"
-	version  = "7.2.1"
+	version  = "7.5.1.nfzbank.1"
 )
 
 func main() {
